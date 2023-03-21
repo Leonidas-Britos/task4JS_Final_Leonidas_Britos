@@ -1,15 +1,24 @@
-let eventos = data.events;
+let urlAPI = "https://mindhub-xj03.onrender.com/api/amazing";
 
-const queryString = location.search; //guardo en una variable la ruta o link que nosotros vamos a tener en el navegador, es decir en la que nos vamos a encontrar en ese momento.CAPTURAMOS RUTA CON ID DE JUGADOR
 
-const params = new URLSearchParams(queryString); //es una interfaz que atraves de metodos nos va a permitir acceder/obyener los distintos strings de una ruts, es decir los valores y consultas que se le está haciedno.INSTANCIAND/CREANDO NUEVO URLSEARCHPARAMS CON ESA RUTA
+const getApi = async () => {
+    eventos = [];
+    let response = await fetch(urlAPI);
+    let datos = await response.json();
 
-const id = params.get("id"); //capturo a traves del metodo get el id.Y DE DICHA RUTA SACANDO EL PARAMETRO LLAMADO ID
+    eventos = datos.events;
 
-const elementObject = eventos.find(evento => evento._id == id)//IDENTFICAMOS AL EVENTOS QUE SE LE HACE CLICK Y ASI HACER LA TARJETA
 
-const divContenedor = document.querySelector(".card_detail");
-divContenedor.innerHTML = `
+    const queryString = location.search; //guardo en una variable la ruta o link que nosotros vamos a tener en el navegador, es decir en la que nos vamos a encontrar en ese momento.CAPTURAMOS RUTA CON ID DE JUGADOR
+
+    const params = new URLSearchParams(queryString); //es una interfaz que atraves de metodos nos va a permitir acceder/obyener los distintos strings de una ruts, es decir los valores y consultas que se le está haciedno.INSTANCIAND/CREANDO NUEVO URLSEARCHPARAMS CON ESA RUTA
+
+    const id = params.get("id"); //capturo a traves del metodo get el id.Y DE DICHA RUTA SACANDO EL PARAMETRO LLAMADO ID
+
+    const elementObject = eventos.find(evento => evento._id == id)//IDENTFICAMOS AL EVENTOS QUE SE LE HACE CLICK Y ASI HACER LA TARJETA
+
+    const divContenedor = document.querySelector(".card_detail");
+    divContenedor.innerHTML = `
 <img class="tarjeta-imagen-detail" src="${elementObject.image}" alt="imagen de la card">
 <div class="content_box_details">
 <h2 class="tarjeta-titulo-detail">${elementObject.name}</h2>
@@ -27,5 +36,6 @@ divContenedor.innerHTML = `
 </div>
 `;
 
-
+}
+getApi();
 

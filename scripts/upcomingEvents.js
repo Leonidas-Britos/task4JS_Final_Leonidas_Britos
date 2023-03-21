@@ -1,7 +1,17 @@
-//Guardo el objeto data dentro de una nueva variable.
-let eventos = data.events;
+let urlAPI = "https://mindhub-xj03.onrender.com/api/amazing";
+
+
+
+const getApi = async () =>{
+    eventos = [];
+    let response = await fetch(urlAPI);
+    let datos = await response.json();
+
+     eventos = datos.events;
+
+
 //Guardo el current date del objeto data en una variable.
-let currentDate = data.currentDate
+let currentDate = datos.currentDate
 
 //Filtro eventos futuros .
 function filtrarFecha(eventos) {
@@ -14,7 +24,7 @@ function filtrarFecha(eventos) {
   return eventUpcoming;
 }
 
-const upcomingFiltrado = filtrarFecha(data.events);
+const upcomingFiltrado = filtrarFecha(eventos);
 
 /*------------------------------GENERO UN ARRAY CON CATEGORÍAS SIN REPETIR------------------------------ */
 function extraerCategorias(eventos) {
@@ -183,3 +193,5 @@ function imprimirCards(arrayAfiltrar, contenedorHtml) {
 
 escucharyFiltrarCheckBoxes();
 imprimirCards(upcomingFiltrado, '.cards_upcomingEvents');
+}
+getApi();

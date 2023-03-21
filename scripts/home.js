@@ -1,7 +1,17 @@
-//Guardo el objeto data dentro de una nueva variable.
-let eventos = data.events;
+let urlAPI = "https://mindhub-xj03.onrender.com/api/amazing";
 
-/*------------------------------GENERO UN ARRAY CON CATEGORÍAS SIN REPETIR------------------------------ */
+
+
+
+const getApi = async () =>{
+    eventos = [];
+    let response = await fetch(urlAPI);
+    let datos = await response.json();
+
+     eventos = datos.events;
+     
+
+  /*------------------------------GENERO UN ARRAY CON CATEGORÍAS SIN REPETIR------------------------------ */
 function extraerCategorias(eventos) {
   let categorias = [];
   eventos.forEach(element => {
@@ -168,3 +178,11 @@ function imprimirCards(arrayAfiltrar, contenedorHtml) {
 
 escucharyFiltrarCheckBoxes();
 imprimirCards(eventos, '.cards_home');
+
+     
+
+}
+getApi();
+
+
+

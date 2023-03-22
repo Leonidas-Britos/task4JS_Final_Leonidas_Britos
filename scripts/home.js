@@ -81,7 +81,6 @@ const escucharyFiltrarCheckBoxes = () => {
               </div>
             `
           }
-
         }
       }
     });

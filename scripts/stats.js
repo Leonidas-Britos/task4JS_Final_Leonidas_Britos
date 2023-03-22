@@ -6,14 +6,9 @@ const getApi = async () => {
     let datos = await response.json();
     eventos = datos.events;
 
-
-    /*/////////////////////////////////////*/
-
-
     const maxCapacityEvent = eventos.reduce((maxCapacityEvent, event) => {
         return event.capacity > maxCapacityEvent.capacity ? event : maxCapacityEvent;
     }, eventos[0]);
-    /*/////////////////////////////////////*/
 
     let maxPercentage = 0;
     let maxEvent = null;
@@ -26,7 +21,7 @@ const getApi = async () => {
             maxEvent = eventos[i];
         }
     }
-    /*/////////////////////////////////////*/
+
     let minPercentage = 100;
     let minEvent = null;
 
@@ -39,10 +34,6 @@ const getApi = async () => {
             minEvent = eventos[i];
         }
     }
-    /*/////////////////////////////////////*/
-    
-
-    /*/////////////////////////////////////*/
 
     let contenedorStats1 = document.querySelector(".contenido_stats1");
     contenedorStats1.innerHTML = "";
@@ -79,14 +70,10 @@ const getApi = async () => {
             return categorias;
           }
 
-
     let contenedorStats2 = document.querySelector("tbody.tbody2");
 
     categorys = extraerCategorias(eventos);
-
-
     let tableStatsHTML = "";
-
     categorys.forEach(category => {
          tableStatsHTML +=`<tr>
                          <td>${category}</td>
@@ -95,8 +82,6 @@ const getApi = async () => {
                          </tr>`;
         })
         contenedorStats2.innerHTML = tableStatsHTML;
-
-        
 
 
         let contenedorStats3 = document.querySelector("tbody.tbody3");
@@ -107,7 +92,7 @@ const getApi = async () => {
     let tableStatsHTML3 = "";
 
     categorys.forEach(category => {
-         tableStatsHTML +=`<tr>
+        tableStatsHTML3 +=`<tr>
                          <td>${category}</td>
                          <td>-</td>
                          <td>-</td>

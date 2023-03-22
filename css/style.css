@@ -319,7 +319,6 @@ td {
     padding: 0.3em;
     text-align: center;
     vertical-align: middle;
-
 }
 
 .table th {
@@ -645,7 +644,6 @@ legend {
         width: 380px;
     }
 
-    /*///////////////*/
     .card_detail {
         width: 590px;
     }

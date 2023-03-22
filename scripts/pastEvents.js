@@ -173,7 +173,6 @@ const busquedaPorNombreyCoincidencia = () => {
 
 /*-------------------------------------FUNCION PARA IMPRIMIR CARDS---------------------------------------- */
 
-
 //Imprime las cards, hay que pasarle por parametro el array que se quiere filtrar y el contenedor donde se lo quiere colocar en el html
 function imprimirCards(arrayAfiltrar, contenedorHtml) {
   let contenedorCards = document.querySelector(contenedorHtml);

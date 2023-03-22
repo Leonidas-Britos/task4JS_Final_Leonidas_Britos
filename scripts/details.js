@@ -24,11 +24,12 @@ const getApi = async () => {
 <h2 class="tarjeta-titulo-detail">${elementObject.name}</h2>
 <p class="description_details">${elementObject.description}</p>
 <div class="another_info_details">
-<p><b class="b_details">Category: </b>${elementObject.category}.</p>
-<p><b class="b_details">Place: </b>${elementObject.place}.</p>
-<p><b class="b_details">Capacity: </b>${elementObject.capacity} people.</p>
-<p><b class="b_details">Assistance: </b>${elementObject.assistance} people.</p>
-<p><b class="b_details">Price: </b>$${elementObject.price}.</p>
+<p><b class="b_details">Category: <br></b>${elementObject.category}.</p>
+<p><b class="b_details">Place: <br></b>${elementObject.place}.</p>
+<p><b class="b_details">Capacity: <br></b>${elementObject.capacity} people.</p><br>
+${elementObject.assistance ? `<p><b class="b_details">Assistance: <br></b>${elementObject.assistance} people.</p>` : ''}
+${elementObject.estimate ? `<p><b class="b_details">Estimate: <br></b>${elementObject.estimate}.</p>` : ''}
+<p><b class="b_details">Price: <br></b>$${elementObject.price}.</p>
 </div>
 <br>
 <br>

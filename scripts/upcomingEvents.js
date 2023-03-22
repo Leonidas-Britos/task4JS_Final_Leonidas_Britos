@@ -1,30 +1,37 @@
 let urlAPI = "https://mindhub-xj03.onrender.com/api/amazing";
 
+let eventos = [];
+let listaCategorias;
+let upcomingFiltrado;
 
+const getApi = async () => {
+  eventos = [];
+  let response = await fetch(urlAPI);
+  let datos = await response.json();
 
-const getApi = async () =>{
-    eventos = [];
-    let response = await fetch(urlAPI);
-    let datos = await response.json();
+  eventos = datos.events;
 
-     eventos = datos.events;
+  //Guardo el current date del objeto data en una variable.
+  let currentDate = datos.currentDate
 
-
-//Guardo el current date del objeto data en una variable.
-let currentDate = datos.currentDate
-
-//Filtro eventos futuros .
-function filtrarFecha(eventos) {
-  const eventUpcoming = []
-  for (evento of eventos) {
-    if (currentDate < evento.date) {
-      eventUpcoming.push(evento)
+  //Filtro eventos futuros .
+  function filtrarFecha(eventos) {
+    const eventUpcoming = []
+    for (evento of eventos) {
+      if (currentDate < evento.date) {
+        eventUpcoming.push(evento)
+      }
     }
+    return eventUpcoming;
   }
-  return eventUpcoming;
+  upcomingFiltrado = filtrarFecha(eventos);
+  imprimirCards(upcomingFiltrado, '.cards_upcomingEvents');
+  listaCategorias = extraerCategorias(eventos);
+  generarChecksPorCategoria();
+  busquedaPorNombreyCoincidencia();
+  escucharyFiltrarCheckBoxes();
 }
-
-const upcomingFiltrado = filtrarFecha(eventos);
+getApi();
 
 /*------------------------------GENERO UN ARRAY CON CATEGORÍAS SIN REPETIR------------------------------ */
 function extraerCategorias(eventos) {
@@ -36,7 +43,6 @@ function extraerCategorias(eventos) {
   });
   return categorias;
 }
-const listaCategorias = extraerCategorias(eventos);
 
 /*------------------------------GENERO LOS CHECKS EN EL HTML POR CADA CATEGORÍA------------------------------ */
 const generarChecksPorCategoria = () => {
@@ -47,7 +53,6 @@ const generarChecksPorCategoria = () => {
   }
   form.innerHTML = HTMLchecks;
 }
-generarChecksPorCategoria();
 
 /*----------------------------ESCUCHO LOS CAMBIOS EN LOS CHECKBOXES Y FILTRO------------------------------ */
 const escucharyFiltrarCheckBoxes = () => {
@@ -165,8 +170,6 @@ const busquedaPorNombreyCoincidencia = () => {
   });
 };
 
-busquedaPorNombreyCoincidencia();
-
 /*-------------------------------------FUNCION PARA IMPRIMIR CARDS---------------------------------------- */
 
 
@@ -191,7 +194,3 @@ function imprimirCards(arrayAfiltrar, contenedorHtml) {
   });
 }
 
-escucharyFiltrarCheckBoxes();
-imprimirCards(upcomingFiltrado, '.cards_upcomingEvents');
-}
-getApi();

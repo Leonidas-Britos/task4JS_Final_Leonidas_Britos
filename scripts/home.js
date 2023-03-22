@@ -1,17 +1,24 @@
-let urlAPI = "https://mindhub-xj03.onrender.com/api/amazing";
+const urlAPI = "https://mindhub-xj03.onrender.com/api/amazing";
 
 
+let eventos = [];
+let listaCategorias;
 
+const getApi = async () => {
+  eventos = [];
+  let response = await fetch(urlAPI);
+  let datos = await response.json();
 
-const getApi = async () =>{
-    eventos = [];
-    let response = await fetch(urlAPI);
-    let datos = await response.json();
+  eventos = datos.events;
+  imprimirCards(eventos, '.cards_home');
+  listaCategorias = extraerCategorias(eventos);
+  busquedaPorNombreyCoincidencia();
+  generarChecksPorCategoria();
+  escucharyFiltrarCheckBoxes();
+}
+getApi();
 
-     eventos = datos.events;
-     
-
-  /*------------------------------GENERO UN ARRAY CON CATEGORÍAS SIN REPETIR------------------------------ */
+/*------------------------------GENERO UN ARRAY CON CATEGORÍAS SIN REPETIR------------------------------ */
 function extraerCategorias(eventos) {
   let categorias = [];
   eventos.forEach(element => {
@@ -21,7 +28,6 @@ function extraerCategorias(eventos) {
   });
   return categorias;
 }
-const listaCategorias = extraerCategorias(eventos);
 
 /*------------------------------GENERO LOS CHECKS EN EL HTML POR CADA CATEGORÍA------------------------------ */
 const generarChecksPorCategoria = () => {
@@ -32,7 +38,6 @@ const generarChecksPorCategoria = () => {
   }
   form.innerHTML = HTMLchecks;
 }
-generarChecksPorCategoria();
 
 /*----------------------------ESCUCHO LOS CAMBIOS EN LOS CHECKBOXES Y FILTRO------------------------------ */
 const escucharyFiltrarCheckBoxes = () => {
@@ -151,8 +156,6 @@ const busquedaPorNombreyCoincidencia = () => {
   });
 };
 
-busquedaPorNombreyCoincidencia();
-
 /*-------------------------------------FUNCION PARA IMPRIMIR CARDS---------------------------------------- */
 
 //Imprime las cards, hay que pasarle por parametro el array que se quiere filtrar y el contenedor donde se lo quiere colocar en el html
@@ -176,13 +179,10 @@ function imprimirCards(arrayAfiltrar, contenedorHtml) {
   });
 }
 
-escucharyFiltrarCheckBoxes();
-imprimirCards(eventos, '.cards_home');
 
-     
 
-}
-getApi();
+
+
 
 
 

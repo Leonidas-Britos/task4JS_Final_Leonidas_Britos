@@ -74,7 +74,7 @@ const escucharyFiltrarCheckBoxes = () => {
       //Hora de imprimir cards:
       //Si no existe ningún input checkeado imprimo todas las cards disponibles con la función imprimirCards().
       if (ArrInputsChecked.length === 0) {
-        imprimirCards(pastFiltrado, '.cards_pastEvents')
+        imprimirCards(inputBuscados, '.cards_pastEvents')
       } else {
         //Si no hay texto en el buscador, imprimo las cards correspondientes a los checks marcados con la función imprimirCards() y guardo esa condicion en la variable inputCheckeados.
         if (inputBuscados.length == 0) {

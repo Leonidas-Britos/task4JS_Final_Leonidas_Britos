@@ -58,19 +58,26 @@ const listenAndFilter = () => {
       });
       //Hora de imprimir cards:
       //Si no existe ningún input checkeado imprimo todas las cards disponibles con la función imprimirCards().
-      if (ArrInputsChecked.length === 0) {
-        renderCards(events, '.cards_home')
-      } else {
+      if (ArrInputsChecked.length === 0 && searchedInputs.length === 0) {
+        renderCards(events, '.cards_home');
+        console.log("0")
+      }
+      else if (ArrInputsChecked.length === 0 && searchedInputs.length > 0) {
+        console.log("1")
+        renderCards(searchedInputs, '.cards_home');
+      }
+      else {
         //Si no hay texto en el buscador, imprimo las cards correspondientes a los checks marcados con la función imprimirCards() y guardo esa condicion en la variable inputCheckeados.
-        if (searchedInputs.length == 0) {
+        if (searchedInputs.length == 0 && ArrInputsChecked.length > 0) {
           let selectedcategories = events.filter(event => ArrInputsChecked.includes(event.category));
-
+          console.log("2")
           renderCards(selectedcategories, '.cards_home');
           inputsChecked = selectedcategories;
-        } else {
-          //Sino filtro en base a los resultados del buscador de texto que traigo desde la función: busquedaPorNombreyCoincidencia().
-          let selectedcategories = searchedInputs.filter(event => ArrInputsChecked.includes(event.category));
-          renderCards(selectedcategories, '.cards_home');
+        } else if (searchedInputs.length > 0 && ArrInputsChecked.length > 0) {
+            //Sino filtro en base a los resultados del buscador de texto que traigo desde la función: busquedaPorNombreyCoincidencia().
+            let selectedcategories = searchedInputs.filter(event => ArrInputsChecked.includes(event.category));
+            console.log("3")
+            renderCards(selectedcategories, '.cards_home');
 
           if (selectedcategories == false) {
             let messageErrorFilters = document.querySelector('.cards_home');
@@ -178,11 +185,6 @@ function renderCards(arrayToFilter, contentHtml) {
   </div>`;
   });
 }
-
-
-
-
-
 
 
 
